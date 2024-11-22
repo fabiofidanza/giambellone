@@ -7,6 +7,8 @@ const giambellone = (() => {
 		backgroundColor: "#ddd",
 		foregroundColor: "#EC008C",
 		valueAttribute: 'data--giambellone-value',
+		animate: true,
+		animateDuration: 1000
 	} 
 
 	function _init(customOptions = {}) {
@@ -68,10 +70,29 @@ const giambellone = (() => {
 
 		const lineLength = under.getTotalLength();
 		const offset = lineLength * (1-fraction);
-
+	
 		over.setAttribute('stroke-dasharray',`${lineLength}px`);
 		over.setAttribute('stroke-dashoffset',`${offset}px`);
 		
+	}
+
+	function _animateProgress(gauge,progress) {
+
+		let startTime = performance.now();
+
+		function step() {
+
+			const currentProgress = Math.min((performance.now() - startTime) / options.animateDuration, 1) * progress;
+
+			if(currentProgress < 1) {
+				_setProgress(gauge,currentProgress);
+				requestAnimationFrame(step);
+			}
+
+		}
+
+		requestAnimationFrame(step);
+
 	}
 
 	function _renderGauge(element, customOptions = {}) {
@@ -96,8 +117,11 @@ const giambellone = (() => {
 		 
 		element.appendChild(gauge);
 
-		_setProgress(gauge,progress);
-		
+		if(options.animate) {
+			_animateProgress(gauge,progress);		
+		} else {
+			_setProgress(gauge,progress);
+		}
 
 	}
 
