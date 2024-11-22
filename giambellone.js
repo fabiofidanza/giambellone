@@ -5,7 +5,7 @@ const giambellone = (() => {
 	let options = {
 		thickness: 0.2,
 		backgroundColor: "#ddd",
-		foregroundColor: "#EC008C",
+		foregroundColor: "#222",
 		valueAttribute: 'data--giambellone-value',
 		animate: false,
 		animateDuration: 1000,
@@ -142,15 +142,4 @@ const giambellone = (() => {
 	}
 
 })();
-
-window.addEventListener('load',() => {
-	giambellone.renderGauges('.gauge',
-		{
-			thickness: 0.2,
-			animate: true,
-			animateDuration: 2000,
-			animateEasingExponent: 2
-		});
-}
-);
 

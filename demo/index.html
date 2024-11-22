@@ -11,6 +11,10 @@
 			font-family: "Futura", Lato, "Helvetica Neue", sans-serif;
 			font-size: 2rem;
 		}
+		.gauges {
+			display: flex;
+			align-items: flex-start;
+		}
 		.gauge {
 			position: relative;
 			width: max-content;
@@ -22,13 +26,34 @@
 			width: 100%;
 			text-align: center;
 		}
+
+		.gauge:nth-child(2) svg {
+			width: 400px;
+			height: 400px;
+		}
 	</style>
 </head>
 
 <body>
-	<div class="gauge"><span>0.9</span></div>
-	<div data--giambellone-value="0.4" class="gauge"><span>CICCIO</span></div>
-	<div class="gauge"><span>0.22</span></div>
+	<div class="gauges">
+		<div class="gauge"><span>0.9</span></div>
+		<div data--giambellone-value="0.4" class="gauge"><span>CICCIO</span></div>
+		<div class="gauge"><span>0.22</span></div>
+	</div>
+<script>
+	window.addEventListener('load',() => {
+	giambellone.renderGauges('.gauge',
+		{
+			thickness: 0.2,
+			animate: true,
+			foregroundColor: "#EC008C",
+			backgroundColor: "#eee",
+			animateDuration: 2000,
+			animateEasingExponent: 2
+		});
+}
+);
+</script>
 </body>
 
 </html>
