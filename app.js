@@ -7,16 +7,10 @@ const giambellone = (() => {
 		backgroundColor: "#ddd",
 		foregroundColor: "#EC008C",
 		valueAttribute: 'data--giambellone-value',
-		animate: true,
-		animateDuration: 1000
+		animate: false,
+		animateDuration: 1000,
+		animateEasingExponent: 1,
 	} 
-
-	function _init(customOptions = {}) {
-
-		options = {	...options,
-					...customOptions};
-	
-	}
 
 	function _createProgressGauge(thickness, bgColor, fgColor) {
 
@@ -82,8 +76,8 @@ const giambellone = (() => {
 
 		function step() {
 
-			const currentProgress = Math.min((performance.now() - startTime) / options.animateDuration, 1) * progress;
-
+			const currentProgress = Math.min((performance.now() - startTime) / options.animateDuration, 1) ** options.animateEasingExponent * progress;
+			
 			if(currentProgress < 1) {
 				_setProgress(gauge,currentProgress);
 				requestAnimationFrame(step);
@@ -95,17 +89,12 @@ const giambellone = (() => {
 
 	}
 
-	function _renderGauge(element, customOptions = {}) {
-
-		const gaugeOptions = {
-			...options,
-			...customOptions
-		};
+	function _renderGauge(element) {
 
 		const gauge = _createProgressGauge(
-			gaugeOptions.thickness,
-			gaugeOptions.backgroundColor,
-			gaugeOptions.foregroundColor);
+						options.thickness,
+						options.backgroundColor,
+						options.foregroundColor);
 			                
 		let progress;
 
@@ -127,7 +116,7 @@ const giambellone = (() => {
 
 	function _renderGauges(elements, customOptions = {}) {
 
-		const gaugeOptions = {
+		options = {
 			...options,
 			...customOptions
 		};
@@ -143,24 +132,25 @@ const giambellone = (() => {
 		}
 
 		gaugeElements.forEach( (element) => {
-			_renderGauge(element,gaugeOptions);
+			_renderGauge(element);
 		})
 
 	}
 
 	return {
-		init: _init,
 		renderGauges: _renderGauges
 	}
 
 })();
 
 window.addEventListener('load',() => {
-	giambellone.init();
 	giambellone.renderGauges('.gauge',
-{
-	thickness: 0.5
-});
+		{
+			thickness: 0.2,
+			animate: true,
+			animateDuration: 2000,
+			animateEasingExponent: 2
+		});
 }
 );
 

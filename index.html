@@ -6,12 +6,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<script src="app.js"></script>
+	<style>
+		body {
+			font-family: "Futura", Lato, "Helvetica Neue", sans-serif;
+			font-size: 2rem;
+		}
+		.gauge {
+			position: relative;
+			width: max-content;
+		}
+		.gauge span {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 100%;
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="gauge"><span>0.9</span></div>
-	<div data--giambellone-value="0.4" class="gauge">ciccia</div>
-	<div class="gauge">0.2</div>
+	<div data--giambellone-value="0.4" class="gauge"><span>ciccia</span></div>
+	<div class="gauge"><span>0.2</span></div>
 </body>
 
 </html>
