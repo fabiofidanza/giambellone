@@ -21,6 +21,8 @@ giambellone.renderGauges('.gauge',
 Pass a selector, an Element or an Array of Element(s).
 Pass your options or let it use decent defaults.
 
+The donut, rendered as an SVG, is appended to the element.
+
 Default options, all overridable:
 
 ```	
@@ -32,4 +34,7 @@ animate: false,
 animateDuration: 1000,
 animateEasingExponent: 1
 ```
+
+The `animateEasingExponent` works as exponent applied to the 0—1 range.
+Values greater than 1 mean slow start, increasing speed, values lower than 1 mean fast start, decreasing speed.
 	
