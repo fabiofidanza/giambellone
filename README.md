@@ -12,3 +12,13 @@ Poor people's donut gauge renderer.
 
 Pass a selector, an Element or an Array of Element(s).
 Pass your options or let it use decent defaults.
+
+# License
+
+This software is musicware.
+If you like it, use it, fork it, or anything else,
+please listen to Fidanza Jazz Combo music,
+and if you're very generous, subscribe in your favourite
+music streaming service.
+
+Peace!

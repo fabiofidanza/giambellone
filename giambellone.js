@@ -62,11 +62,18 @@ const giambellone = (() => {
 		const under = svg.querySelector('.under');
 		const over = svg.querySelector('.over');
 
-		const lineLength = under.getTotalLength();
+		const lineLength = Math.ceil(under.getTotalLength());
 		const offset = lineLength * (1-fraction);
+
+		if(fraction !== 1) {
+			over.setAttribute('stroke-dasharray',`${lineLength}px`);
+			over.setAttribute('stroke-dashoffset',`${offset}px`);
+		} else {
+			over.removeAttribute('stroke-dasharray');
+			over.removeAttribute('stroke-dashoffset');
+		}
 	
-		over.setAttribute('stroke-dasharray',`${lineLength}px`);
-		over.setAttribute('stroke-dashoffset',`${offset}px`);
+		
 		
 	}
 
@@ -78,7 +85,7 @@ const giambellone = (() => {
 
 			const currentProgress = Math.min((performance.now() - startTime) / options.animateDuration, 1) ** options.animateEasingExponent * progress;
 			
-			if(currentProgress < 1) {
+			if(currentProgress <= 1) {
 				_setProgress(gauge,currentProgress);
 				requestAnimationFrame(step);
 			}
